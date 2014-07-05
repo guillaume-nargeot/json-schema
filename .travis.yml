@@ -2,7 +2,8 @@ language: haskell
 ghc: 7.8
 install:
   - "cabal install --enable-tests --dry-run -v3"
-  - "travis_retry cabal install --only-dependencies --force-reinstalls --enable-tests --enable-library-coverage"
+  - "travis_retry cabal install --only-dependencies --force-reinstalls --enable-tests"
+  - "cabal configure --enable-tests --enable-library-coverage"
 script:
   - "cabal test --jobs=1"
 after_script:
