@@ -1,9 +1,13 @@
 language: haskell
+ghc: 7.8
 install:
   - "cabal install --enable-tests --dry-run -v3"
   - "travis_retry cabal install --only-dependencies --force-reinstalls --enable-tests"
 script:
   - "cabal test --jobs=1"
+after_script:
+  - "cabal install --force-reinstalls hpc-coveralls"
+  - "hpc-coveralls json-schema-generic-aeson-tests --exclude-dir=tests"
 notifications:
   email:
     recipients:
